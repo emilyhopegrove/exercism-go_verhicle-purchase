@@ -149,4 +149,4 @@ CalculateResellPrice(1000, 15)
 
 ### Created by
 
-- @kahgoh
+- @kahgoh# exercism-go_verhicle-purchase
