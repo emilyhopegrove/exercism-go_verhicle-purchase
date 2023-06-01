@@ -1,90 +1,32 @@
 package purchase
+
 import "fmt"
 
-//variables for CalculateResellPrice
+// variables for CalculateResellPrice
 const (
-	lessThan3YearsPercentage = 0.8
+	lessThan3YearsPercentage     = 0.8
 	between3And10YearsPercentage = 0.7
-	tenYearsOrOlder = 0.5
+	tenYearsOrOlder              = 0.5
 )
 
 // NeedsLicense determines whether a license is needed to drive a type of vehicle. Only "car" and "truck" require a license.
 func NeedsLicense(kind string) bool {
-	// if (kind == "car" || kind == "truck"){
-	// 	return true
-	// }else{
-	// 	return false
-	// }
-	
 	return kind == "car" || kind == "truck"
 }
 
 // ChooseVehicle recommends a vehicle for selection. It always recommends the vehicle that comes first in lexicographical order.
 func ChooseVehicle(option1, option2 string) string {
-	// if (option1 < option2){
-	// 	return fmt.Sprintf("%s is clearly the better choice.", option1)
-	// }else{
-	// 	return fmt.Sprintf("%s is clearly the better choice.", option2)
-	// }
-
-	//define just the variable part to use in just one return
-		//so if we make a variable that can be either option1 or option2 depending on which one is 'less than' the other (Comes first in the alphabet)
-		//then we can call that the 'best option' and assign it arbitrarily to one optin or the other
-		//then reassign the best option to the other option is the other option is 'better' than the first option
-		//then we can just use the single best option variable in a return as a place holder in a sprintf
-
 	bestOption := option1
 	if option2 < option1 {
 		bestOption = option2
 	}
 
 	return fmt.Sprintf("%s is clearly the better choice.", bestOption)
-	
+
 }
-
-
 
 // CalculateResellPrice calculates how much a vehicle can resell for at a certain age.
 func CalculateResellPrice(originalPrice, age float64) float64 {
-	//if the vehicle is less than 3 years old, it costs 80% of the original price
-	//If it is at least 10 years old, it costs 50%
-	//If the vehicle is at least 3 years old but less than 10 years, 
-		//it costs 70% of the original price.
-
-	// Original solution -- make it work
-	// highPrice := float64(originalPrice * .8)
-	// mediumPrice := float64(originalPrice * .7)
-	// lowPrice := float64(originalPrice * .5)
-
-	// if (age < 3) {
-	// 	return highPrice
-	// } else if (age >= 3 && age < 10){
-	// 	return mediumPrice
-	// } else if (age >= 10){
-	// 	return lowPrice
-	// }
-	// return -1
-
-	//optimized solution -- make it scalabe (remove the hardcoding so it's more flexible)
-	
-	// if age < 3 {
-	// 	return originalPrice * lessThan3YearsPercentage
-	// } else if age >= 3 && age < 10 {
-	// 	return originalPrice * between3And10YearsPercentage
-	// } else if age >= 10 {
-	// 	return originalPrice * olderThan10YearsPercentage
-	// }
-	// return -1
-
-	//Defining just the conditional variable could work here, too.
-		//start the resell price at the original price then work down from there x
-			//if the age of the car is under 3 
-				//then multiply the resell price by the lessThan3YearsPercentage x
-			//otherwise if the age is greater than or equal to 10, 
-				//then multiply the resell price by the tenYearsOrOlder x
-			//otherwise multiply the resell price by the between3And10YearsPercentage
-		//return the resell price
-
 	if age <= 0 {
 		return -1
 	}
